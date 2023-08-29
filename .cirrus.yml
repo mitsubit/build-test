@@ -1,0 +1,19 @@
+env:
+    CIRRUS_SHELL: bash
+
+task:
+  timeout_in: 120m
+  name: "CI Docker Build Tester"
+  container:
+      image: ghcr.io/ozipoetra/docker:v1.0.4
+      cpu: 8
+      memory: 32
+      greedy: true
+  check_script:
+      - curl -Ls https://raw.githubusercontent.com/mitsuav/build-test/main/ci/check.sh | bash
+  sync_script:
+      - curl -Ls https://raw.githubusercontent.com/mitsuav/build-test/main/ci/sync.sh | bash
+  build_script:
+      - curl -Ls https://raw.githubusercontent.com/mitsuav/build-test/main/ci/build.sh | bash
+  upload_script:
+      - curl -Ls https://raw.githubusercontent.com/mitsuav/build-test/main/ci/upload.sh | bash
